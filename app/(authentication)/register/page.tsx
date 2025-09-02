@@ -125,7 +125,6 @@ export default function RegisterPage() {
                   e.target.style.borderColor = '#d1d5db';
                   e.target.style.boxShadow = 'none';
                 }}
-                placeholder="votre@email.com"
                 value={formData.email}
                 onChange={handleInputChange}
               />

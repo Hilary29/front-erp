@@ -1,0 +1,118 @@
+# ERP Mozart Group - Documentation des Pages
+
+## 🔐 SYSTÈME D'AUTHENTIFICATION
+
+### Authentification Mock Actuelle
+Le système utilise une authentification simplifiée basée sur localStorage :
+
+**Page de Login :** `/login`
+- **Email :** N'importe quel email valide (pas de validation backend)
+- **Mot de passe :** N'importe quel mot de passe (pas de validation)
+- **Mécanisme :** Simule 1 seconde de chargement puis définit `userRole` en localStorage
+
+### Comment Tester Chaque Rôle
+
+**🔧 Méthode 1 : Via Console du Navigateur**
+```javascript
+// Pour tester en tant qu'Administrateur
+localStorage.setItem('userRole', 'admin');
+localStorage.setItem('isAuthenticated', 'true');
+window.location.reload();
+
+// Pour tester en tant que Manager
+localStorage.setItem('userRole', 'manager');
+localStorage.setItem('isAuthenticated', 'true');
+window.location.reload();
+
+// Pour tester en tant qu'RH
+localStorage.setItem('userRole', 'hr');
+localStorage.setItem('isAuthenticated', 'true');
+window.location.reload();
+
+// Pour tester en tant qu'Employé
+localStorage.setItem('userRole', 'employee');
+localStorage.setItem('isAuthenticated', 'true');
+window.location.reload();
+```
+
+**🎯 Méthode 2 : URLs de Test Direct**
+- Connectez-vous d'abord sur `/login` (email/mdp quelconque)
+- Puis changez le rôle via la console et rechargez
+
+### Pages Accessibles par Rôle
+
+**👨‍💼 ADMINISTRATEUR (`admin`)**
+- Dashboard principal, Gestion utilisateurs, Départements, Rôles
+- Toutes les pages RH (présences, employés, congés, performance, rapports)
+
+**👥 MANAGER (`manager`)**  
+- Dashboard principal, Mon équipe, Rapports équipe, Planning
+
+**🏢 RH (`hr`)**
+- Dashboard principal + toutes les pages RH étendues
+
+**👤 EMPLOYÉ (`employee`)**
+- Dashboard employé, Planning, Feuilles de temps, Congés, Profil
+
+### Protection des Routes
+- **DashboardLayout** vérifie `isAuthenticated` dans localStorage  
+- **Sidebar** filtre la navigation selon `userRole`
+- Redirection automatique vers `/login` si non authentifié
+
+⚠️ **Note Développement :** L'authentification actuelle est mockée pour les tests. En production, il faudra implémenter JWT, sessions sécurisées et validation backend.
+
+---
+
+## Pages d'Authentification
+- `/login` - Page de connexion avec validation et redirection par rôle
+- `/register` - Inscription des nouveaux utilisateurs avec sélection département
+- `/forgot-password` - Récupération de mot de passe par email
+
+## Dashboards Principaux
+- `/dashboard` - Dashboard admin/manager avec statistiques temps réel et insights IA
+- `/employee/dashboard` - Dashboard employé avec pointage et horaires personnels
+
+## Interfaces Administrateur
+- `/admin/users` - Gestion complète des utilisateurs (CRUD, filtres, statuts, rôles)
+- `/admin/departments` - Gestion des départements avec budgets et managers
+- `/admin/roles` - Système de permissions granulaires par modules avec workflow
+
+## Interfaces Manager
+- `/manager/team` - Vue d'ensemble équipe avec statuts temps réel et performances
+- `/manager/reports` - Rapports analytics avec graphiques présences/productivité
+- `/manager/scheduling` - Planificateur calendrier hebdomadaire avec gestion créneaux
+
+## Interfaces Employé
+- `/employee/schedule` - Vue calendrier planning personnel avec statuts et détails
+- `/employee/timesheet` - Gestion feuilles de temps avec calcul auto heures et workflow
+- `/employee/leave` - Demandes de congés avec soldes, historique et suivi approbations
+- `/employee/profile` - Profil complet avec infos personnelles, contact urgence et paramètres
+
+## Interfaces RH Étendues
+- `/hr/attendance` - Gestion des présences avec filtres et statistiques temps réel
+- `/hr/employees` - Annuaire complet avec filtres avancés et détails employés
+- `/hr/leave-management` - Workflow d'approbation des congés avec commentaires RH
+- `/hr/performance` - Système d'évaluations avec scores détaillés et objectifs
+- `/hr/reports` - Rapports analytics RH avec insights et recommandations
+
+## Pages Système
+- `/` - Page d'accueil avec redirection automatique selon authentification
+- `/_not-found` - Page 404 pour les routes inexistantes
+
+## Fonctionnalités Transversales
+- Navigation responsive avec sidebar par rôles et navbar avec profil
+- Système d'authentification avec protection des routes
+- Composants UI réutilisables (Modal, Table, Button, Input, Select, Badge)
+- Thème cohérent avec variables CSS et support dark mode
+- Workflow d'approbation pour congés et feuilles de temps
+- Filtrage et tri avancés sur toutes les tables
+- Export de données et rapports
+- Notifications et alertes utilisateur
+
+## Architecture
+- Next.js 15 avec App Router et TypeScript
+- TailwindCSS pour le styling avec système de design
+- Heroicons pour les icônes
+- Headless UI pour les composants accessibles
+- Données mockées avec interfaces TypeScript strictes
+- Structure modulaire avec composants réutilisables
