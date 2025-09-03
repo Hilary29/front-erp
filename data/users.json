@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "id": "usr_001",
+      "email": "admin@mozart.com",
+      "password": "$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "firstName": "Admin",
+      "lastName": "Mozart",
+      "role": "admin",
+      "department": "administration",
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "lastLogin": null
+    },
+    {
+      "id": "usr_002",
+      "email": "manager@mozart.com",
+      "password": "$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "firstName": "Manager",
+      "lastName": "Mozart",
+      "role": "manager",
+      "department": "operations",
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "lastLogin": null
+    },
+    {
+      "id": "usr_003",
+      "email": "hr@mozart.com",
+      "password": "$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "firstName": "RH",
+      "lastName": "Mozart",
+      "role": "hr",
+      "department": "hr",
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "lastLogin": null
+    },
+    {
+      "id": "usr_004",
+      "email": "employee@mozart.com",
+      "password": "$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "firstName": "Employee",
+      "lastName": "Mozart",
+      "role": "employee",
+      "department": "it",
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "lastLogin": null
+    },
+    {
+      "email": "keubouhilary@gmail.com",
+      "password": "$2b$12$eQKghCec44yX1Qq1HmFL..nBs2NIcHwDsoMa3lTTaIf6DwM6uCxyK",
+      "firstName": "Hilary",
+      "lastName": "Donfack",
+      "role": "employee",
+      "department": "finance",
+      "isActive": true,
+      "lastLogin": "2025-09-03T00:03:12.757Z",
+      "id": "usr_mf378vg9_k4mr6",
+      "createdAt": "2025-09-02T23:48:35.001Z"
+    }
+  ]
+}

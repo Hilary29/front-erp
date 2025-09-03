@@ -15,6 +15,11 @@ export default function DashboardPage() {
     // Récupérer le rôle utilisateur depuis localStorage
     const role = localStorage.getItem('userRole') || 'employee';
     setUserRole(role);
+    
+    // Rediriger les employés vers leur dashboard spécifique
+    if (role === 'employee') {
+      window.location.href = '/employee/dashboard';
+    }
   }, []);
 
   const StatCard = ({ title, value, subtitle, color }: {

@@ -26,13 +26,47 @@ export default function RegisterPage() {
     e.preventDefault();
     setIsLoading(true);
     
-    // TODO: Validation et création de compte
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Rediriger vers login après inscription
-    router.push('/login');
-    
-    setIsLoading(false);
+    // Validation côté client
+    if (formData.password !== formData.confirmPassword) {
+      alert('Les mots de passe ne correspondent pas');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.password,
+          department: formData.department
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert('Compte créé avec succès! Vous êtes maintenant connecté.');
+        // Stocker les infos utilisateur dans localStorage pour compatibilité
+        localStorage.setItem('userRole', result.data.role);
+        localStorage.setItem('userName', `${result.data.firstName} ${result.data.lastName}`);
+        localStorage.setItem('userEmail', result.data.email);
+        
+        router.push('/dashboard');
+      } else {
+        alert(result.error || 'Erreur lors de la création du compte');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      alert('Erreur de création de compte. Veuillez réessayer.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

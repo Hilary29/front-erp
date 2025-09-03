@@ -1,0 +1,11 @@
+{
+  "departments": [
+    {"id": "it", "name": "Informatique"},
+    {"id": "hr", "name": "Ressources Humaines"},
+    {"id": "finance", "name": "Finance"},
+    {"id": "marketing", "name": "Marketing"},
+    {"id": "sales", "name": "Commercial"},
+    {"id": "operations", "name": "Opérations"},
+    {"id": "administration", "name": "Administration"}
+  ]
+}

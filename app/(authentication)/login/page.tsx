@@ -13,14 +13,33 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
     
-    // TODO: Implémenter l'authentification
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Mock login - à remplacer par vraie authentification
-    localStorage.setItem('userRole', 'admin');
-    router.push('/dashboard');
-    
-    setIsLoading(false);
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Stocker les infos utilisateur dans localStorage pour compatibilité
+        localStorage.setItem('userRole', result.data.role);
+        localStorage.setItem('userName', `${result.data.firstName} ${result.data.lastName}`);
+        localStorage.setItem('userEmail', result.data.email);
+        
+        router.push('/dashboard');
+      } else {
+        alert(result.error || 'Erreur de connexion');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('Erreur de connexion. Veuillez réessayer.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

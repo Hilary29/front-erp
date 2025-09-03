@@ -16,10 +16,22 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
   const pathname = usePathname()
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem('isAuthenticated')
-    if (!isAuthenticated && !pathname.startsWith('/login') && !pathname.startsWith('/register') && !pathname.startsWith('/forgot-password')) {
-      router.push('/login')
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/me')
+        if (!response.ok) {
+          if (!pathname.startsWith('/login') && !pathname.startsWith('/register') && !pathname.startsWith('/forgot-password')) {
+            router.push('/login')
+          }
+        }
+      } catch (error) {
+        if (!pathname.startsWith('/login') && !pathname.startsWith('/register') && !pathname.startsWith('/forgot-password')) {
+          router.push('/login')
+        }
+      }
     }
+    
+    checkAuth()
   }, [router, pathname])
 
   const getPageTitle = () => {

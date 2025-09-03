@@ -1,0 +1,20 @@
+{
+  "roles": {
+    "admin": {
+      "name": "Administrateur",
+      "permissions": ["*"]
+    },
+    "manager": {
+      "name": "Manager", 
+      "permissions": ["dashboard", "team", "reports", "scheduling"]
+    },
+    "hr": {
+      "name": "Ressources Humaines",
+      "permissions": ["employees", "leave", "performance", "reports", "attendance"]
+    },
+    "employee": {
+      "name": "Employé",
+      "permissions": ["profile", "timesheet", "leave", "schedule"]
+    }
+  }
+}
